@@ -37,7 +37,9 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   }
 
   handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    
     this.setState({ newTodoName: event.target.value })
+    
   }
 
   onEditButtonClick = (todoId: string) => {
@@ -46,7 +48,10 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
 
   onTodoCreate = async (event: React.ChangeEvent<HTMLButtonElement>) => {
     try {
-      const timedate = this.calculatetimedate()
+      if(event.target.value === ''){
+        alert('Please input UserName')
+      }else{
+        const timedate = this.calculatetimedate()
       const newTodo = await CreateUsers(this.props.auth.getIdToken(), {
         name: this.state.newTodoName,
         timedate
@@ -55,8 +60,10 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         todos: [...this.state.todos, newTodo],
         newTodoName: ''
       })
+      }
+      
     } catch {
-      alert('Todo creation failed')
+      alert('User creation failed')
     }
   }
 
@@ -67,7 +74,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         todos: this.state.todos.filter(todo => todo.todoId !== todoId)
       })
     } catch {
-      alert('Todo deletion failed')
+      alert('User deletion failed')
     }
   }
 
@@ -85,7 +92,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         })
       })
     } catch {
-      alert('Todo deletion failed')
+      alert('User deletion failed')
     }
   }
 
@@ -97,7 +104,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         loadingTodos: false
       })
     } catch (e) {
-      alert(`Failed to fetch todos: ${(e as Error).message}`)
+      alert(`Failed to fetch Users: ${(e as Error).message}`)
     }
   }
 

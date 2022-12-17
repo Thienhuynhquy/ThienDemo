@@ -15,6 +15,8 @@ const serverlessConfiguration: AWS = {
     'serverless-aws-documentation',
     'serverless-esbuild',
     'serverless-iam-roles-per-function',
+    'serverless-plugin-tracing',
+    'serverless-reqvalidator-plugin',
   ],
   package: {
     individually: true,
@@ -29,6 +31,17 @@ const serverlessConfiguration: AWS = {
       lambda: true,
       apiGateway: true,
     },
+    iamRoleStatements:[{
+      Effect: "Allow" ,
+      Action:{
+        xray:[
+          "PutTraceSegments",
+          "PutTelemetryRecords"
+        ]
+      }, 
+      Resource:
+        - "*"
+    }],
     // env variables
     environment: {
       TABLE: 'User-${self:provider.stage}',
@@ -39,8 +52,10 @@ const serverlessConfiguration: AWS = {
       JWKS_URL: 'https://dev-gdfcqcmab63tzby1.us.auth0.com/.well-known/jwks.json',
     },
     // IAM role
-    iamRoleStatements: [
-    ],
+    
+    // iamRoleStatements: [
+      
+    // ],
   },
   // import the function via paths
   functions: {
@@ -51,6 +66,7 @@ const serverlessConfiguration: AWS = {
     UpdateTodo: updateUsers.reqFunc,
     Auth: auth.eventHandler,
   },
+  
   // resources config
   resources: {
     Resources: {
