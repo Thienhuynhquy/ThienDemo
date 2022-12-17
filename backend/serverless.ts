@@ -53,9 +53,9 @@ const serverlessConfiguration: AWS = {
     },
     // IAM role
     
-    // iamRoleStatements: [
+    iamRoleStatements: [
       
-    // ],
+    ],
   },
   // import the function via paths
   functions: {

@@ -48,10 +48,11 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
 
   onTodoCreate = async (event: React.ChangeEvent<HTMLButtonElement>) => {
     try {
-      if(event.target.value === ''){
+      if(this.state.newTodoName == ''){
         alert('Please input UserName')
-      }else{
-        const timedate = this.calculatetimedate()
+        return
+      }
+      const timedate = this.calculatetimedate()
       const newTodo = await CreateUsers(this.props.auth.getIdToken(), {
         name: this.state.newTodoName,
         timedate
@@ -60,7 +61,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         todos: [...this.state.todos, newTodo],
         newTodoName: ''
       })
-      }
+      
       
     } catch {
       alert('User creation failed')
