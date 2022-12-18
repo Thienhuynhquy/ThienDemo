@@ -112,7 +112,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   render() {
     return (
       <div>
-        <Header as="h1">TODOs</Header>
+        <Header as="h1">INFORMATION ACCOUNT</Header>
 
         {this.renderCreateTodoInput()}
 
@@ -130,12 +130,12 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
               color: 'teal',
               labelPosition: 'left',
               icon: 'add',
-              content: 'New task',
+              content: 'Create User',
               onClick: this.onTodoCreate
             }}
             fluid
             actionPosition="left"
-            placeholder="To change the world..."
+            placeholder="Input User Name : "
             onChange={this.handleNameChange}
           />
         </Grid.Column>
@@ -171,10 +171,10 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
           return (
             <Grid.Row key={todo.todoId}>
               <Grid.Column width={1} verticalAlign="middle">
-                <Checkbox
+                {/* <Checkbox
                   onChange={() => this.onTodoCheck(pos)}
                   checked={todo.done}
-                />
+                /> */}
               </Grid.Column>
               <Grid.Column width={10} verticalAlign="middle">
                 {todo.name}
